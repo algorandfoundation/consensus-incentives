@@ -1,2 +1,6 @@
 # consensus-incentives
-Home for technical documentation on Consensus incentivisation
+Technical documentation on Consensus incentivisation.
+
+usage (requires a Tex distrubtion)
+`pdflatex ./consensus-incentives.tex`
+

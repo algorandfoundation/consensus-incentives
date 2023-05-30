@@ -1,0 +1,125 @@
+\documentclass[11pt,a4paper]{article}
+
+\setlength {\marginparwidth }{2cm}
+
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{todonotes}
+\usepackage[automake]{glossaries}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{amssymb,amsmath}
+\usepackage{mathpazo}
+\usepackage{accents}
+\usepackage{longtable,booktabs}
+\usepackage{dcolumn}
+\usepackage{pgf}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{matrix}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage[capitalise,noabbrev,nameinlink]{cleveref}
+\hypersetup{
+  pdftitle={Algorand Consensus Incentivisation},
+  pdfborder={0 0 0},
+  breaklinks=true
+}
+\graphicspath{ {./images/} }
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{pink}{rgb}{0.92,0.2,0.86}
+
+\lstset{frame=tb,
+  language=C,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{pink},
+  keywordstyle=\color{pink},
+  commentstyle=\color{pink},
+  stringstyle=\color{pink},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\DeclareMathOperator{\dom}{dom}
+\newcommand\restrict[2]{\left.#1\right||_{#2}}
+\newcommand\deltavar[1]{\accentset{\Delta}{#1}}
+
+\makeglossaries
+\newglossaryentry{lrm}
+{
+    name={Lorem},
+    description={ipsum}
+}
+
+\begin{document}
+
+\title {Algorand Consensus Incentivisation \\
+       {\large \sc An Algorand Foundation discussion paper}}
+\date  {Version 0.1, 30th May 2023}
+\author{John Woods         \\ {\small \texttt{john@algorand.foundation}} \\
+                              {\small \texttt{john@postquantum.dev}} \\
+}
+
+\maketitle
+
+\section{Purpose}
+The goal of this project is to engineer a native solution at layer 1, modifying the Algorand protocol to \emph{incentivise} the execution of consensus via block production rewards in ALGO. \\
+
+\textbf{The technical goals of this project are:}
+
+\begin{enumerate}
+    \item Define the economic design (funds source, payout function, non-functional requirements) - this is the primary Foundation output.
+    \item Define the technical design (protocol level augmentations, code-level changes, functional requirements) - secondary goal, Inc will lead.
+    \item Define the approach to mitigate gamification (Key surrender, Absenteeism, Vote neglect) - secondary goal.
+\end{enumerate}
+
+\pagebreak
+
+\tableofcontents
+
+\pagebreak
+
+\section{Acknowledgements}
+The ideas presented herein are inspired by and based on discussions with
+people from the research and engineering groups, specifically: Silvio Micali, Paul Rigle, Gary Malouf, Eric Wragge, Staci Warden \& Bruno Martins.
+
+\pagebreak
+
+\section{Context}
+Lorem ipsum
+
+\pagebreak
+
+\section{Solution design}
+
+\subsection{Economic considerations}
+
+\subsection{Payout function}
+$\mathcal{A}$ 
+
+\subsection{Frequency}
+
+\subsection{Game mitigations}
+
+\subsection{Attacks/Fragility}
+\todo{lorem}
+
+\subsection{Fees}
+
+\pagebreak
+
+\section{Conclusion}
+
+\pagebreak
+
+\printglossaries
+
+\end{document}
