@@ -53,17 +53,25 @@
 \newcommand\deltavar[1]{\accentset{\Delta}{#1}}
 
 \makeglossaries
-\newglossaryentry{lrm}
+\newglossaryentry{PPOS}
 {
-    name={Lorem},
-    description={ipsum}
+    name={Pure Proof of Stake},
+    description={a consensus algorithm based on verifiable random functions over elliptic curves, which provide a 
+                 mechanism of cryptographic sortition. Naturally incentivises non-pooled block production.}
 }
+\newglossaryentry{POW}
+{
+    name={Proof of Work},
+    description={a consensus algorithm based on symmetric hash functions, where a newly mined block's digest is under a 
+                 specific threshold. Does not naturally incentivise non-pooled block production.}
+}
+
 
 \begin{document}
 
 \title {Algorand Consensus Incentivisation \\
        {\large \sc An Algorand Foundation discussion paper}}
-\date  {Version 0.1, 30th May 2023}
+\date  {Version 0.1, 18th July 2023}
 \author{John Woods         \\ {\small \texttt{john@algorand.foundation}} \\
                               {\small \texttt{john@postquantum.dev}} \\
 }
@@ -71,13 +79,16 @@
 \maketitle
 
 \section{Purpose}
-The goal of this project is to engineer a native solution at layer 1, modifying the Algorand protocol to \emph{incentivise} the execution of consensus via block production rewards in ALGO. \\
+The goal of this project is to engineer a native solution at layer 1, modifying the Algorand protocol to 
+\emph{incentivise} the execution of consensus via block production rewards in ALGO. \\
 
 \textbf{The technical goals of this project are:}
 
 \begin{enumerate}
-    \item Define the economic design (funds source, payout function, non-functional requirements) - this is the primary Foundation output.
-    \item Define the technical design (protocol level augmentations, code-level changes, functional requirements) - secondary goal, Inc will lead.
+    \item Define the economic design (source of funds, payout function, non-functional requirements) - this is the 
+          primary Foundation output.
+    \item Define the technical design (protocol level augmentations, code-level changes, functional requirements) 
+          - secondary goal, Inc will lead.
     \item Define the approach to mitigate gamification (Key surrender, Absenteeism, Vote neglect) - secondary goal.
 \end{enumerate}
 
@@ -89,12 +100,31 @@ The goal of this project is to engineer a native solution at layer 1, modifying 
 
 \section{Acknowledgements}
 The ideas presented herein are inspired by and based on discussions with
-people from the research and engineering groups, specifically: Silvio Micali, Paul Rigle, Gary Malouf, Eric Wragge, Staci Warden \& Bruno Martins.
+people from Algorand Foundation, Algorand Inc, including the research and engineering groups, specifically: Silvio 
+Micali, Paul Riegle, Gary Malouf, Eric Wragge, Staci Warden \& Bruno Martins.
 
 \pagebreak
 
 \section{Context}
-Lorem ipsum
+Algorand employs \gls{PPOS} (glossary below) as a means of reaching consensus. The security of the decentralised network 
+is predicated on the total count of Algo tokens which are actively staked at any given moment, as a percentage of the 
+total circulating supply. Notably, Algorand's security assumptions rely upon at least $\sim$67\% of the underlying stake 
+being honest in order for the network to remain impervious to attack, rather than $\sim$51\% in traditional \gls{POW} 
+based systems. \\ 
+
+Algorand's original thesis contended, a priori, that a sufficient number of end-users would be naturally incentivised to 
+run a node and contribute to active stake, motivated by the desire to secure their own funds, and as a corollary the 
+network. However, a posteriori, it has been observed that as a consequence of the cost to run a participation node with 
+high uptime, and indeed the technical expertise required to both instantiate and maintain a node, a critical mass of 
+end-user contribution has not been reached. \\
+
+In fact, as the distribution of large holders has slowly fragmented, and a larger proportion of the supply has been held 
+by an increasingly less concentrated set of individuals, active stake has notably \emph{dropped}. The aforementioned 
+friction is too much for most individuals to contribute actively to network security. \\ \\
+
+This paper proposes potential solutions, at a protocol level, to encourage end-users to actively stake their Algo.
+Additionally, we introduce the concept of financial incentives to reward staking, with the aim of materially increasing 
+the total percentage of Algo in circulating supply which are participating in consensus. 
 
 \pagebreak
 
