@@ -15,6 +15,7 @@
 \usepackage{longtable,booktabs}
 \usepackage{dcolumn}
 \usepackage{pgf}
+\usepackage{mathrsfs}
 \usetikzlibrary{shapes.geometric}
 \usetikzlibrary{matrix}
 \usepackage{natbib}
@@ -65,7 +66,18 @@
     description={a consensus algorithm based on symmetric hash functions, where a newly mined block's digest is under a 
                  specific threshold. Does not naturally incentivise non-pooled block production.}
 }
-
+\newglossaryentry{Staker}
+{
+    name={Staker},
+    description={An individual who is actively participating in the security of the network by running a participation 
+                node, with valid participation keys, backed by a sum of Algo}
+}
+\newglossaryentry{Block-Reward}
+{
+    name={Block-Reward},
+    description={a sum of Algo paid to the participation account of an active Staker, when the Staker has successfully
+                produced a valid and network-wide accepted block.}
+}
 
 \begin{document}
 
@@ -99,9 +111,9 @@ The goal of this project is to engineer a native solution at layer 1, modifying 
 \pagebreak
 
 \section{Acknowledgements}
-The ideas presented herein are inspired by and based on discussions with
-people from Algorand Foundation, Algorand Inc, including the research and engineering groups, specifically: Silvio 
-Micali, Paul Riegle, Gary Malouf, Eric Wragge, Staci Warden \& Bruno Martins.
+The ideas presented herein are inspired by and based on discussions with individuals from Algorand Foundation, 
+Algorand Inc, including the research and engineering groups, specifically: Silvio Micali, Paul Riegle, Gary Malouf, 
+Eric Wragge, Staci Warden \& Bruno Martins.
 
 \pagebreak
 
@@ -133,9 +145,32 @@ the total percentage of Algo in circulating supply which are participating in co
 \subsection{Economic considerations}
 
 \subsection{Payout function}
-$\mathcal{A}$ 
+For the purpose of discussion, defined below is a basic linear reward function, which at a given point in time (defined 
+by round number) $\eta$ evaluates to a \gls{Block-Reward} in Algo:\\
+
+\[
+\mathcal{R}(\eta) = \mathcal{M} \times \left( 1 - \frac{\eta}{\mathcal{N}} \right) \times \frac{2}{\mathcal{N}}
+\]
+
+Where:
+\begin{align*}
+\mathcal{M} & : \text{Total coins for incentive (e.g., 500 million).} \\
+\mathcal{B} & : \text{Block time (e.g., 3 seconds).} \\
+\mathcal{T} & : \text{Total duration for the payout (e.g., 5 years).} \\
+\mathcal{N} & : \text{Total number of blocks over the payout period} = \frac{\mathcal{T}}{\mathcal{B}}.
+\end{align*}
+
+One could also consider a function with an exponential decay, such as:
+\[
+\mathcal{R}(\eta) = \mathcal{M} \times e^{-\kappa \mathcal{N}}
+\]
+
+Here the shape of the curve would depend on the value of $\kappa$. Where the lower the value of \(\kappa\), the more 
+elongated the curve.
 
 \subsection{Frequency}
+The payout function for the \glsplural{Block-Reward} will execute on a periodic basis. The payout will occur every 
+$\eta$ blocks. At the time of writing the average block time is \emph{3.4 seconds}.
 
 \subsection{Game mitigations}
 
