@@ -170,10 +170,10 @@ R(\eta) = (1- \frac{\eta}{\mathcal{N}})
 
 \textbf{\emph{Where:}}
 \begin{align*}
-\mathcal{M} & : \text{Total coins for incentive (e.g., 500 million).} \\
+\mathcal{M} & : \text{Total units for incentive (e.g., 500 million Algo).} \\
 \mathcal{B} & : \text{Block time (e.g., 3 seconds).} \\
-\mathcal{T} & : \text{Total duration for the payout (e.g., 5 years).} \\
-\mathcal{N} & : \text{Total number of blocks over the payout period} = \frac{\mathcal{T}}{\mathcal{B}}.
+\mathcal{T} & : \text{Total duration for the payout, expressed in seconds (e.g., 5 years).} \\
+\mathcal{N} & : \text{Total number of blocks over the payout period} = \frac{\mathcal{T}}{\mathcal{B}}.\\
 \end{align*}
 
 Whilst a linear payout is reasonable, we could also consider a function with a configurable exponential decay, which may 
@@ -193,6 +193,12 @@ R'(\eta)= e^{-\rho\frac{\eta}{\mathcal{N}}}
 \[
 \mathcal{R'}(\eta)= \mathcal{M}\times e^{-\rho\frac{\eta}{\mathcal{N}}} \frac{1}{\mathcal{K}}
 \]
+
+\textbf{\emph{Where:}}
+\begin{align*}
+\rho & : \text{Rate of decay.} \\
+\end{align*}
+
 
 Here the shape of the curve would depend on the value of \(\mathcal{K}\). Where the lower the value of \(\mathcal{K}\), 
 the more elongated the curve.
