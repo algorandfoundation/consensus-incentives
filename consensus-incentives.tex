@@ -83,9 +83,14 @@
 
 \title {Algorand Consensus Incentivisation \\
        {\large \sc An Algorand Foundation discussion paper}}
-\date  {Version 0.1, 18th July 2023}
-\author{John Woods         \\ {\small \texttt{john@algorand.foundation}} \\
-                              {\small \texttt{john@postquantum.dev}} \\
+\date  {Version 0.2, 16th August 2023}
+\author{
+    John Woods \\ 
+    {\small \texttt{john@algorand.foundation}} \\
+    {\small \texttt{john@postquantum.dev}} \\
+\and 
+    Michele Treccani  \\
+    {\small \texttt{michele@algorand.foundation}}
 }
 
 \maketitle
@@ -112,8 +117,8 @@ The goal of this project is to engineer a native solution at layer 1, modifying 
 
 \section{Acknowledgements}
 The ideas presented herein are inspired by and based on discussions with individuals from Algorand Foundation, 
-Algorand Inc, including the research and engineering groups, specifically: Silvio Micali, Paul Riegle, Gary Malouf, 
-Eric Wragge, Staci Warden \& Bruno Martins.
+Algorand Inc, including the research and engineering groups, specifically: Michele Treccani, Silvio Micali, Paul Riegle, 
+Gary Malouf, Eric Wragge, Staci Warden \& Bruno Martins.
 
 \pagebreak
 
@@ -145,14 +150,25 @@ the total percentage of Algo in circulating supply which are participating in co
 \subsection{Economic considerations}
 
 \subsection{Payout function}
-For the purpose of discussion, defined below is a basic linear reward function, which at a given point in time (defined 
-by round number) $\eta$ evaluates to a \gls{Block-Reward} in Algo:\\
+For the purpose of discussion, defined below is a linear reward function, which at a given point in time (defined 
+by round number $\eta$) evaluates to a \gls{Block-Reward} in Algo:\\
 
+\textbf{First we define the emission shape, with a linear decrease:}
 \[
-\mathcal{R}(\eta) = \mathcal{M} \times \left( 1 - \frac{\eta}{\mathcal{N}} \right) \times \frac{2}{\mathcal{N}}
+R(\eta) = (1- \frac{\eta}{\mathcal{N}})
 \]
 
-Where:
+\textbf{then, adding a normalisation factor:}
+\[
+\mathcal{K} = \sum_{\eta=1}^\mathcal{N}R(\eta)=(\mathcal{N} -  \frac{\mathcal{N}(\mathcal{N}+1)}{2\times \mathcal{N}})  
+\]
+
+\textbf{$\ni$ the payout function is defined as:}
+\[
+\mathcal{R}(\eta) = \mathcal{M} \times R(\eta) \times \frac{1}{\mathcal{K}}
+\]
+
+\textbf{\emph{Where:}}
 \begin{align*}
 \mathcal{M} & : \text{Total coins for incentive (e.g., 500 million).} \\
 \mathcal{B} & : \text{Block time (e.g., 3 seconds).} \\
@@ -160,13 +176,26 @@ Where:
 \mathcal{N} & : \text{Total number of blocks over the payout period} = \frac{\mathcal{T}}{\mathcal{B}}.
 \end{align*}
 
-One could also consider a function with an exponential decay, such as:
+Whilst a linear payout is reasonable, we could also consider a function with a configurable exponential decay, which may 
+be more fitting given Algorand's capped, inherently deflationary supply: \\ 
+
+\textbf{First we define the emission shape, with an exponential decrease:}
 \[
-\mathcal{R}(\eta) = \mathcal{M} \times e^{-\kappa \mathcal{N}}
+R'(\eta)= e^{-\rho\frac{\eta}{\mathcal{N}}}
 \]
 
-Here the shape of the curve would depend on the value of $\kappa$. Where the lower the value of \(\kappa\), the more 
-elongated the curve.
+\textbf{then, adding a normalisation factor:}
+\[
+\mathcal{K} = \sum_{\eta=1}^\mathcal{N}R'(\eta)= \frac{1-e^{-\rho}}{1-e^{-\frac{\rho}{\mathcal{N}}}}
+\]
+
+\textbf{$\ni$ the payout function is defined as:}
+\[
+\mathcal{R'}(\eta)= \mathcal{M}\times e^{-\rho\frac{\eta}{\mathcal{N}}} \frac{1}{\mathcal{K}}
+\]
+
+Here the shape of the curve would depend on the value of \(\mathcal{K}\). Where the lower the value of \(\mathcal{K}\), 
+the more elongated the curve.
 
 \subsection{Frequency}
 The payout function for the \glsplural{Block-Reward} will execute on a periodic basis. The payout will occur every 
