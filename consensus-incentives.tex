@@ -259,42 +259,42 @@ $\eta$ block(s). At the time of writing the average block time is \emph{3.3 seco
 \textit{per round}.
 
 \subsection{Game mitigations/Anti-fragility}
-Below we describe the primary attack vectors and game-theory aspects they pertain to the proposed implementation above.
+Below we describe the primary attack vectors and game-theory aspects as they pertain to the proposed implementation 
+above.
 
 \subsubsection{Absenteeism} \label{subsubsec:absenteeism}
 Absenteeism refers to stakeholders registering their Algorand stake online (registering an Algorand node online), but 
 subsequently failing to participate in protocol operations (such as proposing and validating blocks). If a sufficient 
 percentage of active stake declares itself online but does not do the work to participate in the consensus protocol the 
 blockchain will stall. Recovery from this stall requires that the derelict stake eventually participates or a network 
-fork to bypass the defaulting Algo from being considered. 
+hard-fork is executed to bypass the defaulting Algo from being considered. 
 
 \subsubsection{Pooling}
-The safety of the Algorand protocol requires that 80\% of the participating stake is held by honest participants. While 
-participation in Algorand's consensus is neither computationally burdensome nor operationally complex in an absolute 
-sense, it may still prove to be beyond the technical capability of the average Algorand holder, who isn't familiar with
-manging computer systems. Instead of excluding individuals from potential consensus rewards these participants may be 
-likely to pool their Algo with a node operator who promises to participate on their behalf and return their rewards for 
-an operational fee. Today this is possible without risking the Algo owner’s principal because participation activity 
-involves a secondary participation key associated with but not controlling spend from the payment account key. If users 
-choose to delegate their participation keys to a pooling service, this may concentrate a large amount of stake with a 
-single entity, posing a risk to network safety through potential accidents or malicious actions, where, as outlined in 
-the section above on Absenteeism, \ref{subsubsec:absenteeism}.
-
-NOTE: This scenario cannot be meaningfully mitigated by limiting the maximum participation from a particular account, 
-node or IP address as a Sybil-attack will trivially bypass such protection.
+The safety of the Algorand protocol requires that $\sim$80\% of the participating stake is held by honest participants. 
+This is part of the primary security assumption. \\
+While participation in Algorand's consensus algorithm is neither computationally burdensome nor operationally complex in 
+an absolute sense, it may still prove to be beyond the technical capability of the average Algorand holder, who may not
+be familiar with managing computer systems. Instead of excluding these individuals from potential consensus rewards 
+these participants may be likely to pool their Algo with a node operator who promises to participate on their behalf and 
+return their rewards for an operational fee. Today this is possible without risking the Algo owner’s principal because 
+participation activity involves a secondary participation key, associated with, but not controlling spend from the 
+payment account. If users choose to delegate their participation keys to a pooling service, this may concentrate a large 
+amount of stake with a single entity, posing a risk to network safety through potential accidents or malicious actions, 
+where, as outlined in the section above on Absenteeism, \ref{subsubsec:absenteeism} a stall could occur. \\ \\
+This scenario cannot be meaningfully mitigated by limiting the maximum participation from a particular account, 
+node or IP address as a Sybil-attack will trivially bypass such protections.
 
 \subsubsection{Modified Clients}
-A strategy to receive consensus rewards while minimizing the network bandwidth and computational resources required when 
-properly participating in Algorand's consensus protocol is to participate through a bespoke modified Algorand node. The 
-official Algorand node implementation maintains substantial local state reflecting the current balance tree of the 
-Algorand blockchain. The reference implementation is usually executed on high-end  hardware to ensure that the 
-responsiblitiy of consensus execution (such as block proposal from current queued transactions and proposal verification 
-based on current balances) can be completed in the smallest quanta of time. Substantial computational and network 
-resources may also be required for the algorithm processing and messaging passing involved. Thus, a sophisticated actor 
-may construct customised node software that avoids the primary resource intensive activities such as keeping in parity 
-with other node's blockchains, proposing empty blocks or falsely validating proposed blocks without actually checking 
-the payload - or equivalent shortcuts. 
-
+A strategy to earn consensus rewards whilst also minimizing the network and computational resources required whilst 
+participating, is to participate through a bespoke, modified, Algorand node. The official Algorand node implementation 
+maintains substantial local state reflecting the current balance tree of the Algorand blockchain. This reference 
+implementation is usually executed on high-end hardware to ensure that the responsibility of consensus execution (such 
+as block proposal from current queued transactions and proposal verification based on current balances) can be completed 
+in the smallest quanta of time. Considerable network and computational network resources may also be required for the 
+algorithm processing and messaging passing required. Thus, a sophisticated attacker may construct a customised node 
+implementation which avoids the primary resource intensive activities such as keeping in parity with other node's 
+blockchains, proposing empty blocks or falsely validating proposed blocks without actually checking the payload - or 
+equivalent damaging shortcuts. 
 
 \todo{lorem}
 
