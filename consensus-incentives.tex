@@ -103,6 +103,12 @@
     description={a secondary private key, associated with the primary private key/account via signature from the primary
                  private key, embued with the right to sign objects during consensus.}
 }
+\newglossaryentry{Blockseed}
+{
+    name={Blockseed},
+    description={a pseudo-random number generated for each block. Its value is based on various pieces of information 
+                 from the blockchain. It is used as part of the sortition algorithm.}
+}
 
 \begin{document}
 
@@ -336,12 +342,12 @@ The approach is as follows:
           portions of global stake (5\% to 10\%), within a reasonable \emph{rolling} time period, to ungracefully exit 
           consensus ad-infinitum without detriment to the network.
     \item As an additional check of liveness, nodes could be requested to ack in response to challenges based 
-          on Blockseeds (which are notably unpredictable and impossible to influence). This approach would permit a
-          targetted percentage subset of the active staking set to be assessed, asserting their liveness, removed where
-          an ack is not provided. This mechanism could be executed every \(\mathcal{Z}\) rounds, with the set of 
-          participants based on some deterministic slice of the Blockseed, for example by comparing each stakers 
-          address with some \(\mathcal{B}\) byte portion of the Blockseed. The challenge too would be predicated on 
-          Blockseed, and be trivially computable.
+          on \glsplural{Blockseed} (which are notably unpredictable and impossible to influence). This approach would 
+          permit a targetted percentage subset of the active staking set to be assessed, asserting their liveness, 
+          removed where an ack is not provided. This mechanism could be executed every \(\mathcal{Z}\) rounds, with the 
+          set of participants based on some deterministic slice of the \gls{Blockseed}, for example by comparing each 
+          stakers address with some \(\mathcal{B}\) byte portion of the \gls{Blockseed}. The challenge too would be 
+          predicated on \gls{Blockseed}, and be trivially computable.
     \item Notably, the aforementioned check would require signature of data with the node's \gls{PartKey}, and thus have
           an implied cost which must be paid for by the associated account. Ergo, we may want to bound this cost with an 
           integer limit value in the initial \gls{KeyReg}, controlling the number of times an account can reassert. 
