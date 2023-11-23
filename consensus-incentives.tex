@@ -128,7 +128,7 @@
 
 \section{Purpose}
 The goal of this project is to engineer a native solution at layer 1, modifying the Algorand protocol to 
-\emph{incentivise} the execution of consensus via block production rewards in ALGO. \\
+\emph{incentivise} the execution of consensus via block production rewards in Algo, Algorand's native token. \\
 
 \textbf{The technical goals of this project are:}
 
@@ -334,11 +334,30 @@ The approach is as follows:
           also not require additional \gls{KeyReg} transactions.
     \item This approach effectively provides "Garbage Collection" for consensus, permitting relatively significant 
           portions of global stake (5\% to 10\%), within a reasonable \emph{rolling} time period, to ungracefully exit 
-          consensus ad-infinitum without detriment to the network. 
+          consensus ad-infinitum without detriment to the network.
+    \item As an additional check of liveness, nodes could be requested to ack in response to challenges based 
+          on Blockseeds (which are notably unpredictable and impossible to influence). This approach would permit a
+          targetted percentage subset of the active staking set to be assessed, asserting their liveness, removed where
+          an ack is not provided. This mechanism could be executed every \(\mathcal{Z}\) rounds, with the set of 
+          participants based on some deterministic slice of the Blockseed, for example by comparing each stakers 
+          address with some \(\mathcal{B}\) byte portion of the Blockseed. The challenge too would be predicated on 
+          Blockseed, and be trivially computable.
+    \item Notably, the aforementioned check would require signature of data with the node's \gls{PartKey}, and thus have
+          an implied cost which must be paid for by the associated account. Ergo, we may want to bound this cost with an 
+          integer limit value in the initial \gls{KeyReg}, controlling the number of times an account can reassert. 
+          Ultimately the goal is to discourage unreliable consensus execution. Staying online should be negligibly 
+          inexpensive, but coming back online after protocol removal should incur a small but substantive expense. 
+
 \end{itemize} \mbox{} \\
 
-Finally, a minimum staking floor may be considered, for example, $8,192$ Algo, $16,384$ Algo, $32,768$ Algo, etc, such a
-floor would likely deter intermittent node operation. \\ 
+Finally, a minimum staking floor may be considered, for example, $8,192$ Algo, $16,384$ Algo, $32,768$ Algo, etc. Such a
+floor would serve two purposes, first, it sets a hard upper bound on the total number of participating nodes. This bound
+makes it practical to track all participating accounts in active memory, which is required to ensure absenteeism checks
+are time bound, second it will likely deter intermittent node operations by "micro" accounts. \\ 
+
+Additionally, a maximum staking ceiling may also be considered, such a limit encourages large accounts to split their 
+stake across multiple accounts which, where split across multiple nodes, adds stall resilience to the network's 
+consensus. Such a limit would likely be between $2^{16}$ and $2^{17}$ Algo. \\ \\
 
 \emph{Note: this solution considers "successful proposals" those which are winning with VRF proof, not ancillary 
       consensus messages.} 
