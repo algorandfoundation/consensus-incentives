@@ -114,7 +114,7 @@
 
 \title {Algorand Consensus Incentivisation \\
        {\large \sc An Algorand Foundation discussion paper}}
-\date  {Version 0.5, 9th November 2023}
+\date  {Version 0.8, 24th November 2023}
 \author{
     John Woods \\ 
     {\small \texttt{john@algorand.foundation}} \\
@@ -342,7 +342,7 @@ The approach is as follows:
           portions of global stake (5\% to 10\%), within a reasonable \emph{rolling} time period, to ungracefully exit 
           consensus ad-infinitum without detriment to the network.
     \item As an additional check of liveness, nodes could be requested to ack in response to challenges based 
-          on \glsplural{Blockseed} (which are notably unpredictable and impossible to influence). This approach would 
+          on \glsplural{Blockseed}, (which are notably unpredictable and impossible to influence). This approach would 
           permit a targetted percentage subset of the active staking set to be assessed, asserting their liveness, 
           removed where an ack is not provided. This mechanism could be executed every \(\mathcal{Z}\) rounds, with the 
           set of participants based on some deterministic slice of the \gls{Blockseed}, for example by comparing each 
